@@ -39,7 +39,7 @@
 
    АБО
 
-   Просто перейдіть за посиланням: [Стилі мовлення](https://tamamohub.github.io/DYM-Project-Zav2/)
+   Просто перейдіть за посиланням: [Стилі мовлення](https://styli-movlennya.vercel.app/)
 
 ## ⚠️ Важливі примітки
 
