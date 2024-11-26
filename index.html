@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Флеш-картки: Стилі мовлення</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            overflow-x: hidden;
+        }
+        .flip-card {
+            perspective: 1000px;
+        }
+        .flip-card-inner {
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        .flip-card-front, .flip-card-back {
+            backface-visibility: hidden;
+        }
+        .flip-card-back {
+            transform: rotateY(180deg);
+        }
+        .floating {
+            animation-name: floating;
+            animation-duration: 3s;
+            animation-iteration-count: infinite;
+            animation-timing-function: ease-in-out;
+        }
+        @keyframes floating {
+            0% { transform: translate(0,  0px); }
+            50%  { transform: translate(0, 15px); }
+            100%   { transform: translate(0, -0px); }   
+        }
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(45deg, #f3e7ff, #d8b4fe, #c084fc);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .svg-animation {
+            animation: rotateSVG 10s linear infinite;
+        }
+        @keyframes rotateSVG {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+    
+        .github-button {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, #9333ea, #c084fc);
+            color: white;
+            border-radius: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(147, 51, 234, 0.1), 0 2px 4px -1px rgba(147, 51, 234, 0.06);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            z-index: 50;
+        }
+
+        .github-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(147, 51, 234, 0.2), 0 4px 6px -2px rgba(147, 51, 234, 0.1);
+        }
+
+        @media (max-width: 640px) {
+            .github-button {
+                bottom: 1rem;
+                right: 1rem;
+                padding: 0.5rem 1rem;
+                font-size: 0.875rem;
+            }
+        }
+
+        .tooltip {
+        position: relative;
+        display: inline-block;
+        }
+    
+        .tooltip .tooltiptext {
+        visibility: hidden;
+        width: 140px;
+        background-color: black;
+        color: #fff;
+        text-align: center;
+        border-radius: 5px;
+        padding: 5px;
+        position: absolute;
+        z-index: 1;
+        bottom: 100%;
+        left: 50%;
+        margin-left: -60px;
+        opacity: 0;
+        transition: opacity 0.3s;
+        }
+    
+        .tooltip:hover .tooltiptext {
+        visibility: visible;
+        opacity: 1;
+        }
+  </style>
+</head>
+<body class="relative mt-10 mb-10 bg-purple-100 flex items-center justify-center">
+    <svg class="absolute svg-animation top-10 left-10 w-16 h-16 opacity-50" xmlns="http://www.w3.org/2000/svg" fill="#9333ea" fill="#9333ea" viewBox="0 0 24 24">
+        <path fill-rule="evenodd" d="M5 8a1 1 0 0 1 1 1v3a4.006 4.006 0 0 0 4 4h4a4.006 4.006 0 0 0 4-4V9a1 1 0 1 1 2 0v3.001A6.006 6.006 0 0 1 14.001 18H13v2h2a1 1 0 1 1 0 2H9a1 1 0 1 1 0-2h2v-2H9.999A6.006 6.006 0 0 1 4 12.001V9a1 1 0 0 1 1-1Z" clip-rule="evenodd"/>
+        <path d="M7 6a4 4 0 0 1 4-4h2a4 4 0 0 1 4 4v5a4 4 0 0 1-4 4h-2a4 4 0 0 1-4-4V6Z"/>
+    </svg>
+    <svg class="absolute svg-animation top-20 right-20 w-12 h-12 opacity-30" xmlns="http://www.w3.org/2000/svg" fill="#9333ea" viewBox="0 0 24 24">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9v3a5.006 5.006 0 0 1-5 5h-4a5.006 5.006 0 0 1-5-5V9m7 9v3m-3 0h6M11 3h2a3 3 0 0 1 3 3v5a3 3 0 0 1-3 3h-2a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3Z"/>
+    </svg>
+    <svg class="absolute svg-animation bottom-20 left-20 w-10 h-10 opacity-20" xmlns="http://www.w3.org/2000/svg" fill="#9333ea" viewBox="0 0 24 24">
+        <path d="M17.133 12.632v-1.8a5.406 5.406 0 0 0-4.154-5.262.955.955 0 0 0 .021-.106V3.1a1 1 0 0 0-2 0v2.364a.955.955 0 0 0 .021.106 5.406 5.406 0 0 0-4.154 5.262v1.8C6.867 15.018 5 15.614 5 16.807 5 17.4 5 18 5.538 18h12.924C19 18 19 17.4 19 16.807c0-1.193-1.867-1.789-1.867-4.175ZM8.823 19a3.453 3.453 0 0 0 6.354 0H8.823Z"/>
+    </svg>
+    <svg class="absolute svg-animation top-32 right-32 w-24 h-24 opacity-40" xmlns="http://www.w3.org/2000/svg" fill="#9333ea" viewBox="0 0 24 24">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m7.171 12.906-2.153 6.411 2.672-.89 1.568 2.34 1.825-5.183m5.73-2.678 2.154 6.411-2.673-.89-1.568 2.34-1.825-5.183M9.165 4.3c.58.068 1.153-.17 1.515-.628a1.681 1.681 0 0 1 2.64 0 1.68 1.68 0 0 0 1.515.628 1.681 1.681 0 0 1 1.866 1.866c-.068.58.17 1.154.628 1.516a1.681 1.681 0 0 1 0 2.639 1.682 1.682 0 0 0-.628 1.515 1.681 1.681 0 0 1-1.866 1.866 1.681 1.681 0 0 0-1.516.628 1.681 1.681 0 0 1-2.639 0 1.681 1.681 0 0 0-1.515-.628 1.681 1.681 0 0 1-1.867-1.866 1.681 1.681 0 0 0-.627-1.515 1.681 1.681 0 0 1 0-2.64c.458-.361.696-.935.627-1.515A1.681 1.681 0 0 1 9.165 4.3ZM14 9a2 2 0 1 1-4 0 2 2 0 0 1 4 0Z"/>
+    </svg>
+    <svg class="absolute svg-animation bottom-32 left-32 w-12 h-12 opacity-25" xmlns="http://www.w3.org/2000/svg" fill="#9333ea" viewBox="0 0 24 24">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m8.032 12 1.984 1.984 4.96-4.96m4.55 5.272.893-.893a1.984 1.984 0 0 0 0-2.806l-.893-.893a1.984 1.984 0 0 1-.581-1.403V7.04a1.984 1.984 0 0 0-1.984-1.984h-1.262a1.983 1.983 0 0 1-1.403-.581l-.893-.893a1.984 1.984 0 0 0-2.806 0l-.893.893a1.984 1.984 0 0 1-1.403.581H7.04A1.984 1.984 0 0 0 5.055 7.04v1.262c0 .527-.209 1.031-.581 1.403l-.893.893a1.984 1.984 0 0 0 0 2.806l.893.893c.372.372.581.876.581 1.403v1.262a1.984 1.984 0 0 0 1.984 1.984h1.262c.527 0 1.031.209 1.403.581l.893.893a1.984 1.984 0 0 0 2.806 0l.893-.893a1.985 1.985 0 0 1 1.403-.581h1.262a1.984 1.984 0 0 0 1.984-1.984V15.7c0-.527.209-1.031.581-1.403Z"/>
+    </svg>
+    <svg class="absolute svg-animation top-40 left-5 w-16 h-16 opacity-50" xmlns="http://www.w3.org/2000/svg" fill="#9333ea" viewBox="0 0 24 24">
+        <path d="M11 21V2.352A3.451 3.451 0 0 0 9.5 2a3.5 3.5 0 0 0-3.261 2.238A3.5 3.5 0 0 0 4.04 8.015a3.518 3.518 0 0 0-.766 1.128c-.042.1-.064.209-.1.313a3.34 3.34 0 0 0-.106.344 3.463 3.463 0 0 0 .02 1.468A4.017 4.017 0 0 0 2.3 12.5l-.015.036a3.861 3.861 0 0 0-.216.779A3.968 3.968 0 0 0 2 14c.003.24.027.48.072.716a4 4 0 0 0 .235.832c.006.014.015.027.021.041a3.85 3.85 0 0 0 .417.727c.105.146.219.285.342.415.072.076.148.146.225.216.1.091.205.179.315.26.11.081.2.14.308.2.02.013.039.028.059.04v.053a3.506 3.506 0 0 0 3.03 3.469 3.426 3.426 0 0 0 4.154.577A.972.972 0 0 1 11 21Zm10.934-7.68a3.956 3.956 0 0 0-.215-.779l-.017-.038a4.016 4.016 0 0 0-.79-1.235 3.417 3.417 0 0 0 .017-1.468 3.387 3.387 0 0 0-.1-.333c-.034-.108-.057-.22-.1-.324a3.517 3.517 0 0 0-.766-1.128 3.5 3.5 0 0 0-2.202-3.777A3.5 3.5 0 0 0 14.5 2a3.451 3.451 0 0 0-1.5.352V21a.972.972 0 0 1-.184.546 3.426 3.426 0 0 0 4.154-.577A3.506 3.506 0 0 0 20 17.5v-.049c.02-.012.039-.027.059-.04.106-.064.208-.13.308-.2s.214-.169.315-.26c.077-.07.153-.14.225-.216a4.007 4.007 0 0 0 .459-.588c.115-.176.215-.361.3-.554.006-.014.015-.027.021-.041.087-.213.156-.434.205-.659.013-.057.024-.115.035-.173.046-.237.07-.478.073-.72a3.948 3.948 0 0 0-.066-.68Z"/>
+    </svg>
+    <svg class="absolute svg-animation bottom-40 right-5 w-20 h-20 opacity-35" xmlns="http://www.w3.org/2000/svg" fill="#9333ea" viewBox="0 0 24 24">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18.5A2.493 2.493 0 0 1 7.51 20H7.5a2.468 2.468 0 0 1-2.4-3.154 2.98 2.98 0 0 1-.85-5.274 2.468 2.468 0 0 1 .92-3.182 2.477 2.477 0 0 1 1.876-3.344 2.5 2.5 0 0 1 3.41-1.856A2.5 2.5 0 0 1 12 5.5m0 13v-13m0 13a2.493 2.493 0 0 0 4.49 1.5h.01a2.468 2.468 0 0 0 2.403-3.154 2.98 2.98 0 0 0 .847-5.274 2.468 2.468 0 0 0-.921-3.182 2.477 2.477 0 0 0-1.875-3.344A2.5 2.5 0 0 0 14.5 3 2.5 2.5 0 0 0 12 5.5m-8 5a2.5 2.5 0 0 1 3.48-2.3m-.28 8.551a3 3 0 0 1-2.953-5.185M20 10.5a2.5 2.5 0 0 0-3.481-2.3m.28 8.551a3 3 0 0 0 2.954-5.185"/>
+    </svg>
+    <svg class="absolute svg-animation top-1/3 left-1/3 w-8 h-8 opacity-45" xmlns="http://www.w3.org/2000/svg" fill="#9333ea" viewBox="0 0 24 24">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 19V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v13H7a2 2 0 0 0-2 2Zm0 0a2 2 0 0 0 2 2h12M9 3v14m7 0v4"/>
+    </svg>
+    <svg class="absolute svg-animation bottom-1/4 right-1/4 w-24 h-24 opacity-30" xmlns="http://www.w3.org/2000/svg" fill="#9333ea" viewBox="0 0 24 24">
+        <path fill-rule="evenodd" d="M11 4.717c-2.286-.58-4.16-.756-7.045-.71A1.99 1.99 0 0 0 2 6v11c0 1.133.934 2.022 2.044 2.007 2.759-.038 4.5.16 6.956.791V4.717Zm2 15.081c2.456-.631 4.198-.829 6.956-.791A2.013 2.013 0 0 0 22 16.999V6a1.99 1.99 0 0 0-1.955-1.993c-2.885-.046-4.76.13-7.045.71v15.081Z" clip-rule="evenodd"/>
+    </svg>
+    <svg class="absolute svg-animation top-1/4 left-1/4 w-14 h-14 opacity-50" xmlns="http://www.w3.org/2000/svg" fill="#9333ea" viewBox="0 0 24 24">
+        <path d="M12 0l8 16h-16l8-16z"/>
+    </svg>
+    <svg class="absolute svg-animation bottom-1/3 left-10 w-10 h-10 opacity-35" xmlns="http://www.w3.org/2000/svg" fill="#9333ea" viewBox="0 0 24 24">
+        <path d="M11 9a1 1 0 1 1 2 0 1 1 0 0 1-2 0Z"/>
+        <path fill-rule="evenodd" d="M9.896 3.051a2.681 2.681 0 0 1 4.208 0c.147.186.38.282.615.255a2.681 2.681 0 0 1 2.976 2.975.681.681 0 0 0 .254.615 2.681 2.681 0 0 1 0 4.208.682.682 0 0 0-.254.615 2.681 2.681 0 0 1-2.976 2.976.681.681 0 0 0-.615.254 2.682 2.682 0 0 1-4.208 0 .681.681 0 0 0-.614-.255 2.681 2.681 0 0 1-2.976-2.975.681.681 0 0 0-.255-.615 2.681 2.681 0 0 1 0-4.208.681.681 0 0 0 .255-.615 2.681 2.681 0 0 1 2.976-2.975.681.681 0 0 0 .614-.255ZM12 6a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z" clip-rule="evenodd"/>
+        <path d="M5.395 15.055 4.07 19a1 1 0 0 0 1.264 1.267l1.95-.65 1.144 1.707A1 1 0 0 0 10.2 21.1l1.12-3.18a4.641 4.641 0 0 1-2.515-1.208 4.667 4.667 0 0 1-3.411-1.656Zm7.269 2.867 1.12 3.177a1 1 0 0 0 1.773.224l1.144-1.707 1.95.65A1 1 0 0 0 19.915 19l-1.32-3.93a4.667 4.667 0 0 1-3.4 1.642 4.643 4.643 0 0 1-2.53 1.21Z"/>
+    </svg>
+    <svg class="absolute svg-animation top-1/4 right-10 w-12 h-12 opacity-40" xmlns="http://www.w3.org/2000/svg" fill="#9333ea" viewBox="0 0 24 24">
+        <path fill-rule="evenodd" d="M12 2c-.791 0-1.55.314-2.11.874l-.893.893a.985.985 0 0 1-.696.288H7.04A2.984 2.984 0 0 0 4.055 7.04v1.262a.986.986 0 0 1-.288.696l-.893.893a2.984 2.984 0 0 0 0 4.22l.893.893a.985.985 0 0 1 .288.696v1.262a2.984 2.984 0 0 0 2.984 2.984h1.262c.261 0 .512.104.696.288l.893.893a2.984 2.984 0 0 0 4.22 0l.893-.893a.985.985 0 0 1 .696-.288h1.262a2.984 2.984 0 0 0 2.984-2.984V15.7c0-.261.104-.512.288-.696l.893-.893a2.984 2.984 0 0 0 0-4.22l-.893-.893a.985.985 0 0 1-.288-.696V7.04a2.984 2.984 0 0 0-2.984-2.984h-1.262a.985.985 0 0 1-.696-.288l-.893-.893A2.984 2.984 0 0 0 12 2Zm3.683 7.73a1 1 0 1 0-1.414-1.413l-4.253 4.253-1.277-1.277a1 1 0 0 0-1.415 1.414l1.985 1.984a1 1 0 0 0 1.414 0l4.96-4.96Z" clip-rule="evenodd"/>
+    </svg>
+    <svg class="absolute svg-animation bottom-10 right-1/5 w-16 h-16 opacity-50" xmlns="http://www.w3.org/2000/svg" fill="#9333ea" viewBox="0 0 24 24">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.03v13m0-13c-2.819-.831-4.715-1.076-8.029-1.023A.99.99 0 0 0 3 6v11c0 .563.466 1.014 1.03 1.007 3.122-.043 5.018.212 7.97 1.023m0-13c2.819-.831 4.715-1.076 8.029-1.023A.99.99 0 0 1 21 6v11c0 .563-.466 1.014-1.03 1.007-3.122-.043-5.018.212-7.97 1.023"/>
+    </svg>
+    <svg class="absolute svg-animation top-1/5 left-1/6 w-14 h-14 opacity-20" xmlns="http://www.w3.org/2000/svg" fill="#9333ea" viewBox="0 0 24 24">
+        <path fill-rule="evenodd" d="M3.559 4.544c.355-.35.834-.544 1.33-.544H19.11c.496 0 .975.194 1.33.544.356.35.559.829.559 1.331v9.25c0 .502-.203.981-.559 1.331-.355.35-.834.544-1.33.544H15.5l-2.7 3.6a1 1 0 0 1-1.6 0L8.5 17H4.889c-.496 0-.975-.194-1.33-.544A1.868 1.868 0 0 1 3 15.125v-9.25c0-.502.203-.981.559-1.331ZM7.556 7.5a1 1 0 1 0 0 2h8a1 1 0 0 0 0-2h-8Zm0 3.5a1 1 0 1 0 0 2H12a1 1 0 1 0 0-2H7.556Z" clip-rule="evenodd"/>
+    </svg>
+    <svg class="absolute svg-animation top-1/6 right-1/6 w-16 h-16 opacity-25" xmlns="http://www.w3.org/2000/svg" fill="#9333ea" viewBox="0 0 24 24">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7.556 8.5h8m-8 3.5H12m7.111-7H4.89a.896.896 0 0 0-.629.256.868.868 0 0 0-.26.619v9.25c0 .232.094.455.26.619A.896.896 0 0 0 4.89 16H9l3 4 3-4h4.111a.896.896 0 0 0 .629-.256.868.868 0 0 0 .26-.619v-9.25a.868.868 0 0 0-.26-.619.896.896 0 0 0-.63-.256Z"/>
+    </svg>
+    <svg class="absolute svg-animation bottom-1/6 left-1/6 w-8 h-8 opacity-50" xmlns="http://www.w3.org/2000/svg" fill="#9333ea" viewBox="0 0 24 24">
+        <path fill-rule="evenodd" d="M6 2a2 2 0 0 0-2 2v15a3 3 0 0 0 3 3h12a1 1 0 1 0 0-2h-2v-2h2a1 1 0 0 0 1-1V4a2 2 0 0 0-2-2h-8v16h5v2H7a1 1 0 1 1 0-2h1V2H6Z" clip-rule="evenodd"/>
+    </svg>
+    <svg class="absolute svg-animation top-1/8 right-1/8 w-12 h-12 opacity-40" xmlns="http://www.w3.org/2000/svg" fill="#9333ea" viewBox="0 0 24 24">
+        <path fill-rule="evenodd" d="M2 6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6Zm6.962 4.856a1.475 1.475 0 0 1 1.484.066A1 1 0 1 0 11.53 9.24a3.475 3.475 0 1 0-.187 5.955 1 1 0 1 0-.976-1.746 1.474 1.474 0 1 1-1.405-2.593Zm6.186 0a1.475 1.475 0 0 1 1.484.066 1 1 0 1 0 1.084-1.682 3.475 3.475 0 1 0-.187 5.955 1 1 0 1 0-.976-1.746 1.474 1.474 0 1 1-1.405-2.593Z" clip-rule="evenodd"/>
+    </svg>
+    <svg class="absolute svg-animation bottom-1/8 left-1/8 w-10 h-10 opacity-30" xmlns="http://www.w3.org/2000/svg" fill="#9333ea" viewBox="0 0 24 24">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.855 14.322a2.475 2.475 0 1 1 .133-4.241m6.053 4.241a2.475 2.475 0 1 1 .133-4.241M4 5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z"/>
+    </svg>
+    <svg class="absolute svg-animation top-12 right-12 w-16 h-16 opacity-35" xmlns="http://www.w3.org/2000/svg" fill="#9333ea" viewBox="0 0 24 24">
+        <path fill-rule="evenodd" d="M8 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1h2a2 2 0 0 1 2 2v15a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h2Zm6 1h-4v2H9a1 1 0 0 0 0 2h6a1 1 0 1 0 0-2h-1V4Z" clip-rule="evenodd"/>
+    </svg>
+    <div class="space-y-8 lg:space-y-0 lg:grid lg:grid-cols-3 sm:gap-4 xl:gap-6">
+        <a href="https://github.com/your-username/Styli-movlennya" target="_blank" class="github-button">
+            <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+            </svg>
+            GitHub Репозиторій
+        </a>
+        <div class="flex justify-center items-center h-auto lg:h-screen bg-purple-100">
+            <div class="flip-card w-72 h-96 bg-transparent perspective floating">
+                <div class="flip-card-inner relative w-full h-full">
+                    <div class="flip-card-front absolute w-full h-full backface-hidden">
+                        <div class="w-full h-full bg-purple-200 border border-gray-200 rounded-lg shadow flex flex-col justify-between">
+                            <img class="rounded-t-lg w-full h-3/4 object-cover" src="https://i.postimg.cc/26GJj5cs/President-s-Day-bro.png" alt="Офіційно-діловий стиль" />
+                            <div class="p-5">
+                                <h5 class="text-2xl text-center font-bold tracking-tight text-gray-900">Офіційно-діловий</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flip-card-back absolute w-full h-full backface-hidden rotate-y-180">
+                        <div class="w-full h-full bg-purple-200 border border-gray-200 rounded-lg shadow p-5">
+                            <div class="grid grid-cols-2 gap-2 h-full">
+                                <div class="h-auto tooltip">
+                                    <img class="h-auto w-full rounded-lg object-cover" src="https://i.postimg.cc/Sxnv6bvj/free-icon-accuracy-4729423.png" alt="" />
+                                    <div class="tooltiptext">Точність</div>
+                                </div>
+                                <div class="h-auto tooltip">
+                                    <img class="h-auto w-full rounded-lg object-cover" src="https://i.postimg.cc/pXGS5Lkg/free-icon-document-3566009.png" alt="" />
+                                    <div class="tooltiptext">Документальність</div>
+                                </div>
+                                <div class="h-auto tooltip">
+                                    <img class="h-auto w-full rounded-lg object-cover" src="https://i.postimg.cc/m22qrH3Y/free-icon-stable-8744697.png" alt="" />
+                                    <div class="tooltiptext">Стабільність</div>
+                                </div>
+                                <div class="h-auto tooltip">
+                                    <img class="h-auto w-full rounded-lg object-cover" src="https://i.postimg.cc/L8G0vQcD/free-icon-stress-management-11315962.png" alt="" />
+                                    <div class="tooltiptext">Стриманість</div>
+                                </div>
+                            </div>    
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-center items-center h-auto lg:h-screen bg-purple-100">
+            <div class="flip-card w-72 h-96 bg-transparent perspective floating">
+              <div class="flip-card-inner relative w-full h-full">
+                <div class="flip-card-front absolute w-full h-full backface-hidden">
+                  <div class="w-full h-full bg-purple-200 border border-gray-200 rounded-lg shadow flex flex-col justify-between">
+                    <img class="rounded-t-lg w-full h-3/4 object-cover" src="https://i.postimg.cc/8kBW56bJ/first-communion-cuate.png" alt="Офіційно-діловий стиль" />
+                    <div class="p-5">
+                      <h5 class="text-2xl text-center font-bold tracking-tight text-gray-900">Церковний</h5>
+                    </div>
+                  </div>
+                </div>
+                <div class="flip-card-back absolute w-full h-full backface-hidden rotate-y-180">
+                  <div class="w-full h-full bg-purple-200 border border-gray-200 rounded-lg shadow p-5">
+                    <div class="grid grid-cols-2 gap-2 h-full">
+                        <div class="h-auto tooltip">
+                            <img class="h-auto w-full rounded-lg object-cover" src="https://i.postimg.cc/g2LgwqxZ/free-icon-archaic-structure-14654336.png" alt="" />
+                            <div class="tooltiptext">Архаїчність</div>
+                        </div>
+                        <div class="h-auto tooltip">
+                            <img class="h-auto w-full rounded-lg object-cover" src="https://i.postimg.cc/wBK0DyNb/free-icon-church-5778006.png" alt="" />
+                            <div class="tooltiptext">Використання церковно-релігійної лексики</div>
+                        </div>
+                        <div class="h-auto tooltip">
+                            <img class="h-auto w-full rounded-lg object-cover" src="https://i.postimg.cc/vBbhSJ3r/free-icon-laurel-112258.png" alt="" />
+                            <div class="tooltiptext">Урочистість</div>
+                        </div>
+                        <div class="h-auto tooltip">
+                            <img class="h-auto w-full rounded-lg object-cover" src="https://i.postimg.cc/zfnp7zSD/free-icon-standard-size-1799761.png" alt="" />
+                            <div class="tooltiptext">Стандартність</div>
+                        </div>
+                    </div>    
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="flex justify-center items-center h-auto lg:h-screen bg-purple-100">
+            <div class="flip-card w-72 h-96 bg-transparent perspective floating">
+              <div class="flip-card-inner relative w-full h-full">
+                <div class="flip-card-front absolute w-full h-full backface-hidden">
+                  <div class="w-full h-full bg-purple-200 border border-gray-200 rounded-lg shadow flex flex-col justify-between">
+                    <img class="rounded-t-lg w-full h-3/4 object-cover" src="https://i.postimg.cc/xT3PWZZZ/Science-pana.png" alt="Офіційно-діловий стиль" />
+                    <div class="p-5">
+                      <h5 class="text-2xl text-center font-bold tracking-tight text-gray-900">Науковий</h5>
+                    </div>
+                  </div>
+                </div>
+                <div class="flip-card-back absolute w-full h-full backface-hidden rotate-y-180">
+                  <div class="w-full h-full bg-purple-200 border border-gray-200 rounded-lg shadow p-5">
+                    <div class="grid grid-cols-2 gap-2 h-full">
+                        <div class="h-auto tooltip">
+                            <img class="h-auto w-full rounded-lg object-cover" src="https://i.postimg.cc/PqxYpd3F/free-icon-accuracy-4729465.png" alt="" />
+                            <div class="tooltiptext">Точність</div>
+                        </div>
+                        <div class="h-auto tooltip">
+                            <img class="h-auto w-full rounded-lg object-cover" src="https://i.postimg.cc/rwg5wDJr/free-icon-decision-1900223.png" alt="" />
+                            <div class="tooltiptext">Логічність</div>
+                        </div>
+                        <div class="h-auto tooltip">
+                            <img class="h-auto w-full rounded-lg object-cover" src="https://i.postimg.cc/Vkzjwqjw/free-icon-prioritize-4133572.png" alt="" />
+                            <div class="tooltiptext">Послідовність</div>
+                        </div>
+                        <div class="h-auto tooltip">
+                            <img class="h-auto w-full rounded-lg object-cover" src="https://i.postimg.cc/Xqcp1P1C/free-icon-objective-analysis-1465895.png" alt="" />
+                            <div class="tooltiptext">Об'єктивність</div>
+                        </div>
+                        
+                    </div>    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.flip-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const inner = card.querySelector('.flip-card-inner');
+                const front = card.querySelector('.flip-card-front');
+                const back = card.querySelector('.flip-card-back');
+                
+                card.classList.toggle('flipped');
+                
+                // Затримка для завершення анімації перевертання
+                setTimeout(() => {
+                    if (card.classList.contains('flipped')) {
+                        front.classList.add('hidden');
+                        back.classList.remove('hidden');
+                    } else {
+                        back.classList.add('hidden');
+                        front.classList.remove('hidden');
+                    }
+                }, 150);
+            });
+        });
+    </script>
+    <script>
+        // Функція для отримання випадкових чисел
+        function getRandomInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        // Масив із вашими SVG-елементами (ID SVG у масиві)
+        const svgs = ['svg1', 'svg2']; // Тут мають бути всі ID ваших SVG
+
+        function placeRandomSVG(svgId) {
+            const svgElement = document.getElementById(svgId);
+
+            // Створюємо контейнер для SVG
+            const container = document.createElement('div');
+            container.classList.add('svg-container');
+
+            // Випадковий розмір контейнера
+            const size = getRandomInt(50, 150); // Від 50px до 150px
+            container.style.width = `${size}px`;
+            container.style.height = `${size}px`;
+
+            // Випадкове розташування контейнера
+            const x = getRandomInt(0, window.innerWidth - size);
+            const y = getRandomInt(0, window.innerHeight - size);
+            container.style.left = `${x}px`;
+            container.style.top = `${y}px`;
+
+            // Клонуємо SVG і вставляємо в контейнер
+            const clone = svgElement.cloneNode(true);
+            container.appendChild(clone);
+
+            // Додаємо контейнер із SVG до сторінки
+            document.body.appendChild(container);
+        }
+
+        // Розташовуємо всі SVG на сторінці
+        for (let i = 0; i < svgs.length; i++) {
+            placeRandomSVG(svgs[i]);
+        }
+
+        // Оновлюємо SVG при зміні розміру вікна
+        window.addEventListener('resize', () => {
+            document.body.innerHTML = ''; // Очищаємо старі SVG
+            for (let i = 0; i < svgs.length; i++) {
+                placeRandomSVG(svgs[i]);
+            }
+        });
+    </script>
+</body>
+</html>
